@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import Tree from '@naisutech/react-tree'
 
@@ -37,7 +36,7 @@ function App() {
   const [ent, setEnt] = useState(entries);
   const [entryValue, setEntryValue] = useState("");
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
+  const handleKeyDown = (event: any) => {
     event.persist();
     if (event.key === "Enter") {
       setEntryValue("");
