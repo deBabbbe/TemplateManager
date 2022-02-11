@@ -16,6 +16,11 @@ function App() {
       parentId: "AutoResponse",
     },
     {
+      id: "Dynamic",
+      label: "Dynamic",
+      parentId: "AutoResponse",
+    },
+    {
       label: "Anfrage", id: "Anfrage", parentId: null
     },
     {
