@@ -1,45 +1,53 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import Tree from '@naisutech/react-tree'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const entries = [
+    {
+      id: "AutoResponse",
+      label: "Auto Response",
+      parentId: null,
+    },
+    {
+      id: "Static",
+      label: "Static",
+      parentId: "AutoResponse",
+    },
+    {
+      label: "Anfrage", id: "Anfrage", parentId: null
+    },
+    {
+      label: "Auftrag", id: "Auftrag", parentId: null
+    },
+    {
+      label: "Beschwerde", id: "Beschwerde", parentId: null
+    },
+    {
+      label: "Kündigung", id: "Kündigung", parentId: null
+    }
+  ]
+
+  const [ent, setEnt] = useState(entries);
+  const [entryValue, setEntryValue] = useState("");
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    event.persist();
+    if (event.key === "Enter") {
+      setEntryValue("");
+      console.warn(event.target.value)
+      setEnt([...ent, {
+        label: event.target.value, id: event.target.value, parentId: null
+      }])
+    }
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <>
+      <input value={entryValue} onChange={(e) => setEntryValue(e.target.value)} onKeyDown={handleKeyDown}></input>
+      <Tree animations={true} nodes={ent}></Tree>
+    </>
   )
 }
-
 export default App
