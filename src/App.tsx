@@ -46,6 +46,7 @@ function App() {
   const [entryValue, setEntryValue] = useState("");
 
   function addEntry(value: string) {
+    if (!value) return;
     if (!(ent as []).map((e) => e.label).includes(value)) {
       setEntryValue("");
       setEnt([
@@ -53,7 +54,7 @@ function App() {
         {
           label: value,
           id: value,
-          parentId: null,
+          parentId: nodeSelected ? nodeSelected : null,
         },
       ]);
     }
@@ -66,6 +67,13 @@ function App() {
     }
   };
 
+  const [nodeSelected, setNodeSelected] = useState("");
+
+  const onSelectNode = (nodes) => {
+    if (nodes.length > 0) {
+      setNodeSelected(nodes[0]);
+    }
+  };
   return (
     <>
       <input
@@ -74,7 +82,12 @@ function App() {
         onKeyDown={handleKeyDown}
       ></input>
       <Add onClick={() => addEntry(entryValue)}>Hinzufügen</Add>
-      <Tree noIcons={true} animations={true} nodes={ent}></Tree>
+      <Tree
+        noIcons={true}
+        onSelect={onSelectNode}
+        animations={true}
+        nodes={ent}
+      ></Tree>
     </>
   );
 }
