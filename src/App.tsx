@@ -45,6 +45,20 @@ function App() {
   const [ent, setEnt] = useState(entries);
   const [entryValue, setEntryValue] = useState("");
 
+  function addEntry(value: string) {
+    if (!(ent as []).map((e) => e.label).includes(value)) {
+      setEntryValue("");
+      setEnt([
+        ...ent,
+        {
+          label: value,
+          id: value,
+          parentId: null,
+        },
+      ]);
+    }
+  }
+
   const handleKeyDown = (event: any) => {
     event.persist();
     if (event.key === "Enter") {
@@ -63,17 +77,5 @@ function App() {
       <Tree noIcons={true} animations={true} nodes={ent}></Tree>
     </>
   );
-
-  function addEntry(value: string) {
-    setEntryValue("");
-    setEnt([
-      ...ent,
-      {
-        label: value,
-        id: value,
-        parentId: null,
-      },
-    ]);
-  }
 }
 export default App;
