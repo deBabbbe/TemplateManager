@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Add from "@mui/icons-material/Add";
-import Tree from "@naisutech/react-tree";
+import Tree, { NodeId } from "@naisutech/react-tree";
 
 export default function Categories() {
-  const entries = [
+  const entries: any = [
     {
       id: "AutoResponse",
       label: "Auto Response",
@@ -46,7 +46,7 @@ export default function Categories() {
 
   function addEntry(value: string, parentId: string | null) {
     if (!value) return;
-    if (!(ent as []).map((e) => e.label).includes(value)) {
+    if (!ent.map((e: any) => e.label).includes(value)) {
       setEntryValue("");
       setEnt([
         ...ent,
@@ -69,15 +69,14 @@ export default function Categories() {
 
   const [nodeSelected, setNodeSelected] = useState("");
 
-  const onSelectNode = (nodes) => {
-    if (nodes.length > 0) {
-      setNodeSelected(nodes[0]);
+  const onSelectNode = (id: Array<NodeId>): void => {
+    if (id.length > 0) {
+      setNodeSelected(id[0] as any);
     }
   };
 
   return (
     <>
-      {" "}
       <input
         value={entryValue}
         onChange={(e) => setEntryValue(e.target.value)}
