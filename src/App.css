@@ -40,3 +40,15 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+.column-left,
+.column-right {
+  float: left;
+  width: 20%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
