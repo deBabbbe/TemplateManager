@@ -44,6 +44,15 @@ button {
 .column-right {
   float: left;
   width: 20%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.column-mid {
+  float: left;
+  width: 60%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* Clear floats after the columns */
